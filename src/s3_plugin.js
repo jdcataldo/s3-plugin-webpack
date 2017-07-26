@@ -304,11 +304,11 @@ module.exports = class S3Plugin {
 
     return new Promise(function(resolve, reject) {
       if (cloudfrontInvalidateOptions.DistributionId) {
-        const {accessKeyId, secretAccessKey} = clientConfig.s3Options
+        const {accessKeyId, secretAccessKey, sessionToken} = clientConfig.s3Options
         const cloudfront = new aws.CloudFront()
 
         if (accessKeyId && secretAccessKey)
-          cloudfront.config.update({accessKeyId, secretAccessKey})
+          cloudfront.config.update({accessKeyId, secretAccessKey, sessionToken})
 
         cloudfront.createInvalidation({
           DistributionId: cloudfrontInvalidateOptions.DistributionId,
